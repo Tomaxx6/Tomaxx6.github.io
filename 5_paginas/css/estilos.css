@@ -4,28 +4,31 @@ body {
 }
 
 h1 {
-
-
+border-left: 18px solid brown;
 background-color: #735E4C;
-border:black ;
+;
 }
 
 img { 
 
      filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.7));
-
-    border: 5px solid black
+  
+    border: 5px solid black;
 
 
 
 }
 
 ul {
- 
+ list-style: none;
+   display:flex;
+    justify-content: center;
    
 }
 
 li {
-
+   
+border: 1px solid black;
+     display: inline-block;
 }
 
