@@ -1,0 +1,31 @@
+body {
+    background-color: #F2C6A0;
+ text-align: center;
+}
+
+h1 {
+
+
+background-color: #735E4C;
+border:black ;
+}
+
+img { 
+
+     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.7));
+
+    border: 5px solid black
+
+
+
+}
+
+ul {
+ 
+   
+}
+
+li {
+
+}
+
