@@ -5,8 +5,6 @@
 body { 
  background-color: #fa9d7bb8;
   text-align: center;
-
-
 }
 
 h1 {
@@ -14,10 +12,13 @@ h1 {
   border-bottom-style: solid;
   border-bottom-color: black; 
 background-color: #fabe74;
+
 }
 
 img {
-border:black solid 2px
+border:black solid 2px;
+
+
 
 }
 
@@ -29,51 +30,65 @@ ul {
 }
 
 li {
-
+  margin: 5px;
 }
 
 p {
  
   border-top-style:dashed;
-  border-rigth-style:dashed;
+  border-right-style:dashed;
   border-left-style:dashed;
   border-bottom-style:dashed;
   border-top-color:black;
-
+  text-indent: 40px;
+padding: 10px;
 }
   
 
 #header {
-  
+
 }
 
 #content{
-  
+ 
 }
 
 #text {
-  
-}
+     filter: drop-shadow(10px 0px 9px rgba(0, 0, 0, 0.7));
+padding-left: 60px;
+
+    }
 
 #text p {
-  
+   background-color: #fabe74;
+   
+    border-width: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    text-indent: 40px;
+    margin-right: 60px;
+     
 }
 
 #text p:first-child {
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  
+background-image:url(../images/fondoParrafo.png);
+   border-width: 5px;
 }
 
 #text p:last-child {
-
+border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px ;
 }
 
 #menu {
+margin:  10px;
 
 }
 
 #menu a{
+border-left: red solid 5px;
 
 }
 
@@ -83,15 +98,18 @@ p {
 }
 
 #menu li a:hover{
-
+color: red;
 }
 
 #footer{
-
+border-top: black solid 5px;
+background-color: #fabe74;
+color: white;
+ 
 }
 
 #footer a{
-
+color: white;
 }
 
 #footer a:hover{
@@ -102,8 +120,12 @@ p {
 text-align: right;
 margin-right: 60px;
 
+
 }
 
 @media all and (max-width: 500px) {
-
+  img {
+    border: red solid 5px;
+    width: 90%;
+  }
 }
