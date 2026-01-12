@@ -167,15 +167,19 @@ float: left;
  /*
   Punto 4: La capa esta posicionada casi al centro de la pantalla. Se diferencia del menu y del footer en que NO se queda fija al hacer scroll de la pagina.
  */
-position:relative ;
-top: 200px;
-width: auto;
-    height: auto;
+
+    
   /* necesitas 4 instrucciones. 3 son distancia a los bordes :)*/
-  /*1: */  
-  /*2: */    
-  /*3: */    
-  /*4: */    
+  /*1: */position: relative;
+ 
+
+  /*2: */  top: 10em;  
+
+  /*3: */    width: 80%;
+
+  /*4: */ 
+
+
 
   border:2px solid red;
   background-color: white;
@@ -231,7 +235,7 @@ overflow-x: hidden;
     /*
     Punto 7.1: Barra de menu siempre estara 
     */
-    position: absolute;
+ float: none;
     
 
     /* necesitas 1 instruccion*/
@@ -244,7 +248,7 @@ overflow-x: hidden;
     /*
     Punto 7.1: Barra de menu siempre estara 
     */
-    position: absolute;
+ float: none;
     
     /* necesitas 1 instruccion*/
     /*1: */
@@ -261,8 +265,7 @@ overflow-x: hidden;
     /*
     Punto 7.2: Barra de menu siempre estara 
     */
-    position: absolute;
-
+ float: none;
     /* necesitas 1 instruccion*/
     /*1: */
 
