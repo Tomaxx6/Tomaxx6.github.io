@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url('../images/fondo\ kra.jpg') no-repeat center center fixed; /* Fondo fijo */
+  background-size: cover;
+  font-family: 'Indie Flower', cursive;
+}
+
+
+#menu {
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #b80312; 
+  z-index: 1000;
+  padding: 10px 0;
+  text-align: center;
+}
+
+#menu li { 
+  display: inline; 
+  margin: 0 15px; 
+}
+#menu a { color: white; 
+  text-decoration: underline;
+  font-family: 'Pacifico'; 
+}
+
+
+a:hover {
+  background-color: #590E15;
+  
+}
+
+
+#header {
+  margin-top: 80px;
+  text-align: left;
+  color: white;
+  font-size: 35px;
+}
+
+
+#cookieEU {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #b80312;
+  box-shadow: 0 0 50px black;
+  text-align: center;
+  z-index: 2000;
+}
+
+
+.info-layer {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 30px;
+  padding: 20px;
+  border: 5px solid black;
+}
+
+.image-right { flex-direction: row; 
+} 
+.image-left { flex-direction: row; 
+} 
+
+.text-side { flex: 1; 
+  padding: 20px; 
+}
+.image-side img {
+  max-width: 200px;
+  border: dashed 5px #590E15;
+}
+
+
+#rightNav {
+  position: fixed;
+  right: 20px;
+  top: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 500;
+}
+
+#rightNav img { width: 40px; height: 40px; border: none; }
+
+
+#footer {
+position: fixed;
+  bottom: 0%;
+  width: 100%;
+  background-color: #b80312b3;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 50px;
+  border-top: 5px solid #570c0c;
+}
+
+
+@media (max-width: 768px) {
+  .info-layer {
+    flex-direction: column !important; 
+    width: 95%;
+  }
+
+  #rightNav {
+    position: static; 
+    flex-direction: row; 
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  #cookieEU { width: 150%; }
+}
