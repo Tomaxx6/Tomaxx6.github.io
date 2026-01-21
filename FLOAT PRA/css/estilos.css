@@ -73,9 +73,11 @@ a:hover {
   border: 5px solid black;
 }
 
-.image-right { flex-direction: row; 
+.image-right { 
+  flex-direction: row; 
 } 
-.image-left { flex-direction: row; 
+.image-left { 
+  flex-direction: row; 
 } 
 
 .text-side { flex: 1; 
