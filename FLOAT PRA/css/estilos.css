@@ -7,7 +7,7 @@
 body {
   background: url('../images/fondo\ kra.jpg') no-repeat center center fixed; /* Fondo fijo */
   background-size: cover;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Indie Flower';
 }
 
 
@@ -26,7 +26,8 @@ body {
   display: inline; 
   margin: 0 15px; 
 }
-#menu a { color: white; 
+#menu a { 
+  color: white; 
   text-decoration: underline;
   font-family: 'Pacifico'; 
 }
@@ -73,12 +74,7 @@ a:hover {
   border: 5px solid black;
 }
 
-.image-right { 
-  flex-direction: row; 
-} 
-.image-left { 
-  flex-direction: row; 
-} 
+
 
 .text-side { flex: 1; 
   padding: 20px; 
@@ -99,7 +95,10 @@ a:hover {
   z-index: 500;
 }
 
-#rightNav img { width: 40px; height: 40px; border: none; }
+#rightNav img { 
+  width: 40px; 
+  height: 40px; 
+  border: none; }
 
 
 #footer {
