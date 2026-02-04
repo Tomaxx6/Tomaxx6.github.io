@@ -1,0 +1,55 @@
+.card {
+ display: flex;
+ flex-direction: column; 
+ width: 300px;
+ padding: 30px;
+ border-radius: 15px;
+ box-shadow: 0 5px 10px black;
+ font-family: sans-serif;
+}
+
+.header {
+background-color: rgb(227, 226, 226);
+ display: flex;
+ align-items: center; 
+ gap: 60px;
+}
+.avatar {
+ width: 70px;
+ height: 70px;
+ background: #660303;
+ border-radius: 60%;
+}
+
+.seg{
+ display: flex;
+ justify-content: space-around; 
+ border-top: 1px solid white;
+ padding-top: 15px;
+ 
+}
+.seg-item {
+ display: flex;
+ flex-direction: column; 
+ align-items: center;
+}
+
+.boton {
+ display: flex;
+ gap: 10px;
+}
+.boton1 {
+ flex-grow: 2; 
+ background: #660303;
+ color: white;
+ border: none;
+ padding: 10px;
+ border-radius: 5px;
+}
+.boton2 {
+ flex-grow: 1; 
+ background: white;
+ border: none;
+ padding: 10px;
+ border-radius: 5px;
+ }
