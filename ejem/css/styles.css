@@ -1,5 +1,9 @@
 
-
+.todo{
+    display: flex;
+    justify-content:center;
+    margin-top: 70px;
+}
 .card {
  display: flex;
  flex-direction: column; 
