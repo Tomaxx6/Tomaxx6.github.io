@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spock - Piedra, Papel, Tijera, Lagarto</title>
+</head>
+<style>
+    /* Estilos generales */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #2b5876, #4e4376);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 3rem;
+        margin-top: 20px;
+        color: #ffcc00;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    p, label {
+        font-size: 1.2rem;
+    }
+
+    ul {
+        margin-left: 20px;
+        list-style-type: square;
+    }
+
+    ul li {
+        margin-bottom: 5px;
+    }
+
+    select {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    .resultados {
+        margin-top: 20px;
+    }
+
+    .resultado-card {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        padding: 20px 30px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .resultado-elecciones {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        color: #e0e0ff;
+    }
+
+    .resultado-elecciones span {
+        font-weight: bold;
+        color: #ffcc00;
+        text-transform: capitalize;
+    }
+
+    .resultado-veredicto {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+        letter-spacing: 1px;
+    }
+
+    .veredicto-ganaste  { color: #00ff00; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    .veredicto-perdiste { color: #ff4d4d; text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    .veredicto-empate   { color: #ffcc00; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+    .veredicto-espera   { color: #aaa; font-size: 1.2rem; }
+
+    .pensando {
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    .opciones-contenedor {
+        text-align: center;
+        background-color: #ffcc00;
+        color: #000;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+
+    .btn-reiniciar {
+        display: none;
+        margin: 15px auto 0;
+        background-color: rgba(255,255,255,0.2);
+        color: #fff;
+        padding: 10px 24px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 2px solid #ffcc00;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .btn-reiniciar:hover {
+        background-color: rgba(255,204,0,0.25);
+    }
+</style>
+<body>
+    <h1>¡Frikie!</h1>
+    <div class="container">
+        <p>Elige una opción para jugar a piedra, papel, tijera, lagarto o spock. El ordenador está pensando...</p>
+        
+        <h2>Reglas del juego:</h2>
+        <ul>
+            <li>Tijera corta Papel.</li>
+            <li>Papel cubre Piedra.</li>
+            <li>Piedra aplasta Tijera.</li>
+            <li>Lagarto envenena Spock.</li>
+            <li>Spock rompe Tijera.</li>
+            <li>Tijera decapita Lagarto.</li>
+            <li>Lagarto come Papel.</li>
+            <li>Papel desaprueba Spock.</li>
+            <li>Spock vaporiza Piedra.</li>
+            <li>Piedra aplasta Lagarto.</li>
+        </ul>
+
+        <div class="opciones-contenedor">
+            <label for="playerChoice">Elige tu opción:</label>
+            <select id="playerChoice">
+                <option value="selected">Escoge algo</option>
+                <option value="piedra">Piedra</option>
+                <option value="papel">Papel</option>
+                <option value="tijera">Tijera</option>
+                <option value="lagarto">Lagarto</option>
+                <option value="spock">Spock</option>
+            </select>
+        </div>
+
+        <div class="pensando">
+            <p id="ordenadorElige">Ordenador pensando su jugada...</p>
+        </div>
+
+        <div class="resultados">
+            <div class="resultado-card">
+                <p class="resultado-elecciones" id="elecciones">Elige una opción para comenzar.</p>
+                <p class="resultado-veredicto veredicto-espera" id="resultado">—</p>
+            </div>
+            <button class="btn-reiniciar" id="btnReiniciar" onclick="reiniciar()">Volver a jugar</button>
+        </div>
+    </div>
+    
+    <script>
+        // 1. CONFIGURACIÓN INICIAL
+        let tiempoPensar = 5; // Segundos que tarda el PC
+        const opciones = ["piedra", "papel", "tijera", "lagarto", "spock"];
+        
+        // Objeto de reglas: cada clave vence a los elementos de su array
+        const reglas = {
+            piedra: ["tijera", "lagarto"],
+            papel: ["piedra", "spock"],
+            tijera: ["papel", "lagarto"],
+            lagarto: ["spock", "papel"],
+            spock: ["tijera", "piedra"]
+        };
+
+        // 2. REFERENCIAS AL DOM (Elementos HTML)
+        const listaOpciones = document.getElementById("playerChoice");
+        const eleccionesEl = document.getElementById("elecciones");
+        const resultadoEl = document.getElementById("resultado");
+        const btnReiniciar = document.getElementById("btnReiniciar");
+        const textoPensando = document.getElementById("ordenadorElige");
+
+        // 3. VARIABLES DE ESTADO
+        let jugadorEscoge;
+        let ordenadorEscoge;
+
+        // 4. FUNCIÓN AUXILIAR: Generar número aleatorio
+        function randomInt(max) {
+            return Math.floor(Math.random() * (max + 1));
+        }
+
+        // 5. EVENTO: Cuando el jugador cambia el select
+        listaOpciones.addEventListener("change", function() {
+            // Guardamos el valor seleccionado por el usuario
+            jugadorEscoge = this.value;
+
+            // Si el jugador vuelve a poner "Escoge algo", reseteamos
+            if (jugadorEscoge === "selected") {
+                jugadorEscoge = undefined;
+            }
+
+            // Llamamos a la lógica para ver si ya podemos dar un resultado
+            quienGana(jugadorEscoge, ordenadorEscoge);
+        });
+
+        // 6. FUNCIÓN: Lógica del juego y veredicto
+        function quienGana(jugador, ordenador) {
+            // Limpiamos estilos de color del mensaje de resultado
+            resultadoEl.className = "resultado-veredicto";
+
+            // Comprobamos si alguno de los dos falta por elegir
+            if (!jugador || !ordenador) {
+                eleccionesEl.innerHTML = jugador 
+                    ? `Tú elegiste: <span>${jugador}</span>. Esperando al ordenador...` 
+                    : "Elige una opción para jugar.";
+                
+                resultadoEl.textContent = "—";
+                resultadoEl.classList.add("veredicto-espera");
+                return; // Salimos de la función si falta una elección
+            }
+
+            // Si ambos eligieron, mostramos qué eligió cada uno
+            eleccionesEl.innerHTML = `Tú elegiste: <span>${jugador}</span> &nbsp;|&nbsp; Ordenador eligió: <span>${ordenador}</span>`;
+
+            // CASO 1: Empate
+            if (jugador === ordenador) {
+                resultadoEl.textContent = "¡Empate!";
+                resultadoEl.classList.add("veredicto-empate");
+            } 
+            // CASO 2: Victoria (¿Está la elección del PC en la lista de debilidades de la elección del jugador?)
+            else if (reglas[jugador].includes(ordenador)) {
+                resultadoEl.textContent = "¡Ganaste!";
+                resultadoEl.classList.add("veredicto-ganaste");
+            } 
+            // CASO 3: Derrota
+            else {
+                resultadoEl.textContent = "¡Perdiste!";
+                resultadoEl.classList.add("veredicto-perdiste");
+            }
+
+            // Mostramos el botón para reiniciar el juego
+            btnReiniciar.style.display = "block";
+        }
+
+        // 7. FUNCIÓN: Reiniciar el estado del juego
+        function reiniciar() {
+            // Reset de variables
+            jugadorEscoge = undefined;
+            ordenadorEscoge = undefined;
+            
+            // Reset de interfaz
+            listaOpciones.value = "selected";
+            textoPensando.textContent = "Ordenador pensando su jugada...";
+            eleccionesEl.innerHTML = "Elige una opción para jugar.";
+            resultadoEl.textContent = "—";
+            resultadoEl.className = "resultado-veredicto veredicto-espera";
+            btnReiniciar.style.display = "none";
+            
+            // Lanzamos de nuevo la "espera" del ordenador
+            descuenta();
+        }
+
+        // 8. FUNCIÓN: Simular pensamiento del ordenador
+        function descuenta() {
+            // Usamos el tiempo definido al principio (multiplicado por 1000 para milisegundos)
+            setTimeout(() => {
+                // El ordenador elige un índice aleatorio del array 'opciones'
+                let indiceAleatorio = randomInt(opciones.length - 1);
+                ordenadorEscoge = opciones[indiceAleatorio];
+
+                // Actualizamos el texto de la interfaz
+                textoPensando.textContent = "¡El ordenador ya ha elegido!";
+
+                // Intentamos ejecutar el veredicto por si el jugador ya había elegido
+                quienGana(jugadorEscoge, ordenadorEscoge);
+            }, tiempoPensar * 1000);
+        }
+
+        // 9. INICIO AUTOMÁTICO: El ordenador empieza a pensar al cargar la página
+        descuenta();
+
+    </script>
+</body>
+</html>
